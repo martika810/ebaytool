@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>Ebay tool</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"></link>
+    <link rel="stylesheet" th:href="@{/css/main.css}" ></link>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+    <!-- Javascript -->
+    <script tytpe="text/javascript" th:src="@{/js/lib/jquery.js}" />
+    <script type="text/javascript" th:src="@{/js/lib/angular.js}" />
+    <script type="text/javascript" th:src="@{/js/lib/materialize.js}" />
+
+    <script type="text/javascript" th:src="@{/js/src/product-controller.js}" />
+
+</head>
+<body>
+    <div id="productPanel" class="container" ng-app="productApp" ng-controller="productController">
+        <table >
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Net Price</th>
+                    <th>Final Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="product in productList">
+                <td>{{product.name}}</td>
+                <td>{{product.netPrice}}</td>
+                <td>{{product.finalPrice}}</td>
+                <td>{{product.status}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
