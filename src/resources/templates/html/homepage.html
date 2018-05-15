@@ -10,13 +10,27 @@
     <script tytpe="text/javascript" th:src="@{/js/lib/jquery.js}" />
     <script type="text/javascript" th:src="@{/js/lib/angular.js}" />
     <script type="text/javascript" th:src="@{/js/lib/materialize.js}" />
-
     <script type="text/javascript" th:src="@{/js/src/product-controller.js}" />
+
+    <!-- Editable grid -->
+    <!--<script tytpe="text/javascript" th:src="../static/js/lib/editablegrid.js"></script>-->
+    <!--&lt;!&ndash; [DO NOT DEPLOY] &ndash;&gt; <script tytpe="text/javascript" src="../static/js/lib/editablegrid_renderers.js" ></script>-->
+    <!--&lt;!&ndash; [DO NOT DEPLOY] &ndash;&gt; <script tytpe="text/javascript" src="../static/js/lib/editablegrid_editors.js" ></script>-->
+    <!--&lt;!&ndash; [DO NOT DEPLOY] &ndash;&gt; <script tytpe="text/javascript" src="../static/js/lib/editablegrid_validators.js" ></script>-->
+    <!--&lt;!&ndash; [DO NOT DEPLOY] &ndash;&gt; <script tytpe="text/javascript" src="../static/js/lib/editablegrid_utils.js" ></script>-->
+    <!--&lt;!&ndash; [DO NOT DEPLOY] &ndash;&gt; <script tytpe="text/javascript" src="../static/js/lib/editablegrid_charts.js" ></script>-->
+    <!--<link rel="stylesheet" href="../static/css/editablegrid.css" type="text/css" media="screen" />-->
 
 </head>
 <body>
+    <table>
+        <tr th:each="var : ${#vars}">
+            <td th:text="${var.key}"></td>
+            <td th:text="${var.value}"></td>
+        </tr>
+    </table>
     <div id="productPanel" class="container" ng-app="productApp" ng-controller="productController">
-        <table >
+        <table id="htmlgrid" class="testgrid" >
             <thead>
                 <tr>
                     <th>Name</th>
