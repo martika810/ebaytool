@@ -46,11 +46,17 @@ public class FilePersisterTest {
 
         List<ProductMutable> list= Arrays.asList(mutable1,mutable2,mutable3);
         FilePersister.persist("product_list_test.json",list);
-       // List<ProductMutable> retrievedObjects = FilePersister.loadListFromFile("product_list_test.json",List.class);
-        List<ProductMutable> retrievedObjects = null;
+        List<ProductMutable> retrievedObjects = FilePersister.loadListFromFile("product_list_test.json",ProductMutable.class);
+
         assert(retrievedObjects.size()==list.size());
         assert(((ProductMutable)retrievedObjects.get(0)).getId().equals(list.get(0).getId()));
         assert(retrievedObjects.get(1).getId().equals(list.get(1).getId()));
         assert(retrievedObjects.get(2).getId().equals(list.get(2).getId()));
+
+        try {
+            FileUtils.forceDelete(new File("product_list_test.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

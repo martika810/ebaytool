@@ -22,6 +22,7 @@ productApp.controller('productController',function($scope,$http){
    //Los datos de respuseta se devuelven en "response.data"
    //Y se asignan a la variable taskList
        $scope.populatePanel = function(){
+           //$("#grid").remove();
            $http.get("/products")
            .then(function(response){
               $scope.productList = response.data
@@ -57,10 +58,10 @@ productApp.controller('productController',function($scope,$http){
                 },
                 rowHover: false,
                 columns: [
-                    { field: "name", title: "Product Name", width: "120px" },
-                    { field: "netPrice", title: "Net price", width: "80px" },
-                    { field: "finalPrice", title: "Final Price" , width: "80px"},
-                    { field: "status", title: "Status", width: "120px",editor: myCustomEditor },
+                    { field: "name", title: "Product Name", width: "200px" },
+                    { field: "netPrice", title: "Net price", width: "40px" },
+                    { field: "finalPrice", title: "Final Price" , width: "40px"},
+                    { field: "status", title: "Status", width: "80px",editor: myCustomEditor },
                     {
                         width: "104px",
                         title: "Delete Column",
@@ -93,12 +94,14 @@ productApp.controller('productController',function($scope,$http){
                 events:
                 {
                     getCustomEditorValue: function (e) {
+
                         $scope.productList = this.dataSource.data;
                         e.value = $("#dropdown").swidget().value();
                         $("#dropdown").swidget().destroy();
                         $http.put('/products',$scope.productList)
                             .success(function (data, status, headers) {
                                console.log('sucess');
+                               $("#grid").children().remove();
                                $scope.populatePanel();
 
                            })

@@ -2,6 +2,7 @@ package com.mrbcoding.ebaytool.repositories;
 
 import com.mrbcoding.ebaytool.domain.Product;
 import com.mrbcoding.ebaytool.domain.ProductStatus;
+import com.mrbcoding.ebaytool.persistance.FilePersister;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -9,6 +10,7 @@ import java.util.*;
 @Component
 public class ProductRepository implements Repository<String,Product>{
 
+    private final static String fileToStoreProducts="products.json";
     private Map<String,Product> dataSource;
 
     public ProductRepository(){
@@ -18,12 +20,15 @@ public class ProductRepository implements Repository<String,Product>{
     @Override
     public Product add(Product obj) {
         dataSource.put(obj.getId(), obj);
+        save();
         return dataSource.get(obj.getId());
+
     }
 
     @Override
     public Product update(Product obj) {
         dataSource.put(obj.getId(), obj);
+        save();
         return dataSource.get(obj.getName());
     }
 
@@ -33,6 +38,7 @@ public class ProductRepository implements Repository<String,Product>{
 
             dataSource.put(product.getId(), product);
         }
+        save();
     }
 
     @Override
@@ -48,6 +54,10 @@ public class ProductRepository implements Repository<String,Product>{
     @Override
     public Map<String, Product> readAll() {
         return new HashMap<>(dataSource);
+    }
+
+    private void save(){
+        FilePersister.persist(fileToStoreProducts,new ArrayList(dataSource.values()));
     }
 
     private void init() {
